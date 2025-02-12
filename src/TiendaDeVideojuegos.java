@@ -4,7 +4,7 @@ public class TiendaDeVideojuegos {
     private ArrayList<Videojuego> videojuegos;
 
     public TiendaDeVideojuegos() {
-        this.videojuegos = new ArrayList<Videojuego>();
+        this.videojuegos = new ArrayList<>();
     }
 
     public boolean addVideojuego(Videojuego nuevo) {
@@ -18,11 +18,13 @@ public class TiendaDeVideojuegos {
         return true;
     }
 
-    public void deleteVideojuego(int pos) {
+    public boolean deleteVideojuego(int pos) {
         if (pos < videojuegos.size() && pos >= 0) {
             videojuegos.remove(pos);
+            return true;
         } else {
             System.out.println("ERROR: Posición incorrecta.");
+            return false;
         }
     }
 
@@ -31,12 +33,20 @@ public class TiendaDeVideojuegos {
         else System.out.println("ERROR: El videojuego no existe en la tienda.");
     }
 
+    public String mostrarPosicionesYTitulos() {
+        StringBuilder toret = new StringBuilder("Lista de videojuegos:\n");
+        for (int i = 0; i < videojuegos.size(); i++) {
+            toret.append(i + " " + videojuegos.get(i).getTitulo() + " " + videojuegos.get(i).getPlataforma() + "\n");
+        }
+        return toret.toString();
+    }
+
     @Override
     public String toString() {
-        String toret = "Tienda:\n";
+        StringBuilder toret = new StringBuilder("Tienda:\n");
         for (Videojuego videojuego: videojuegos) {
-            toret += videojuego.toString();
+            toret.append(videojuego.toString());
         }
-        return toret;
+        return toret.toString();
     }
 }
